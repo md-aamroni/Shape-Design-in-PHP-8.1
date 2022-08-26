@@ -4,17 +4,22 @@ namespace App;
 
 use App\Interfaces\ConcretePatternAdapter;
 use App\Interfaces\RenderableInterface;
+use App\Patterns\Shape01Design;
+use App\Patterns\Shape02Design;
+use App\Patterns\Shape03Design;
+use App\Patterns\Shape04Design;
 use App\Patterns\Shape05Design;
 use App\Patterns\Shape06Design;
 use App\Patterns\Shape07Design;
 use App\Patterns\Shape08Design;
 use App\Patterns\Shape09Design;
+use App\Patterns\Shape13Design;
 use League\CLImate\CLImate;
 use RecursiveDirectoryIterator;
 
 class ShapeGenerateManager implements RenderableInterface
 {
-    private const SHAPES = [5, 6, 7, 8, 9];
+    private const SHAPES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     /**
      * ConcretePatternAdapter object
@@ -46,11 +51,16 @@ class ShapeGenerateManager implements RenderableInterface
                 throw new \Exception(sprintf('Oops! %s is not found, please try within [%s]', $this->shapeID, implode(', ', self::SHAPES)), 1);
             }
             $this->pattern = match ($this->shapeID) {
+                '1'     => new Shape01Design($length, $symbol),
+                '2'     => new Shape02Design($length, $symbol),
+                '3'     => new Shape03Design($length, $symbol),
+                '4'     => new Shape04Design($length, $symbol),
                 '5'     => new Shape05Design($length, $symbol),
                 '6'     => new Shape06Design($length, $symbol),
                 '7'     => new Shape07Design($length, $symbol),
                 '8'     => new Shape08Design($length, $symbol),
                 '9'     => new Shape09Design($length, $symbol),
+                '13'    => new Shape13Design($length, $symbol),
             };
             return $this;
         } catch (\Throwable $th) {
